@@ -1,0 +1,19 @@
+.Topbar{
+    width:100%;
+    height:4rem;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 10;
+    background-color: rgb(20, 163, 151);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 10px;
+    box-sizing: border-box;   
+}
+@media(max-width:500px){
+    .DesktopOnly{
+        display: none;
+    }
+}
