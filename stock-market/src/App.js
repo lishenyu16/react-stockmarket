@@ -1,10 +1,19 @@
-import React from 'react';
-import './App.css';
+import React,{useState} from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom'
 import Topbar from './components/Navigation/Topbar/Topbar'
 import Home from './components/Home/Home'
+import SideDrawer from './components/Navigation/SideDrawer/SideDrawer'
 
-const app = (props)=>{
+const App = (props)=>{
+  const [showSideDrawer, setShowSideDrawer] = useState(false)
+  
+  const sideDrawerHandler = ()=>{
+    setShowSideDrawer(!showSideDrawer)
+  }
+  const sideDrawerClose = ()=>{
+    setShowSideDrawer(false)
+  }
+
   let routes = (
     <Switch>
       <Route path="/" exact component={Home}></Route>
@@ -14,10 +23,11 @@ const app = (props)=>{
   )
   return (
     <div className="App">
-      <Topbar></Topbar>
+      <Topbar drawerToggleClicked={sideDrawerHandler}></Topbar>
+      <SideDrawer show={showSideDrawer} sideDrawerClicked={sideDrawerClose}></SideDrawer>
       {routes}
     </div>
   );
 }
 
-export default app;
+export default App;
