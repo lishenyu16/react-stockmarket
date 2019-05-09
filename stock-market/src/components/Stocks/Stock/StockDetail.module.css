@@ -1,0 +1,29 @@
+.StockDetail{
+    margin-top:5rem;
+    width:100%;
+    height:auto;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+.Name_Price_Chart{
+    width:60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto;
+}
+.headline{
+    font-size: 2.5rem;
+    margin:0.2rem 0;
+}
+hr{
+    width: 100%;
+    border: 1px dotted lightgray;
+}
+
+.logo{
+    width:30%;
+    max-width: 150px;
+    margin: 0 auto;
+}
