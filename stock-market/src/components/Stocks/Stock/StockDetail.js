@@ -13,13 +13,14 @@ const StockDetail = (props)=>{
 
     let symbol = props.match.params.symbol
 
-    if(range!=='1d'){
-        setChartInterval(null)
-    }
+    // if(range!=='1d'){
+    //     console.log('it again!')
+    //     setChartInterval(null)
+    // }
     useEffect(()=>{
         //1d 5d 1m 3m 6m 1y 2y 5y ytd
         props.getSingleStock(symbol,range,chartInterval)
-    },[])
+    },[range])
     function abbreviateNumber(value) {
         if(value){
             let newValue = value;
@@ -37,7 +38,15 @@ const StockDetail = (props)=>{
         }       
     }
     function selectRange(range){
+        setRange(range)
         setActiveRange(range)
+        if(range=='1d'){
+            setChartInterval(5)
+        }
+        else{           
+            setChartInterval(null)
+        }
+        
     }
     
       
@@ -59,7 +68,7 @@ const StockDetail = (props)=>{
                                 <button onClick={()=>selectRange('3m')} className={activeRange=='3m'?styles.RangeChoiceActive:null}>3m</button>
                                 <button onClick={()=>selectRange('6m')} className={activeRange=='6m'?styles.RangeChoiceActive:null}>6m</button>
                                 <button onClick={()=>selectRange('1y')} className={activeRange=='1y'?styles.RangeChoiceActive:null}>1y</button>
-                                <button onClick={()=>selectRange('3y')} className={activeRange=='3y'?styles.RangeChoiceActive:null}>3y</button>
+                                <button onClick={()=>selectRange('2y')} className={activeRange=='2y'?styles.RangeChoiceActive:null}>2y</button>
                             </ul>
                             <hr></hr>
                             <LineGraph symbol={symbol} chartData={props.chart}></LineGraph>

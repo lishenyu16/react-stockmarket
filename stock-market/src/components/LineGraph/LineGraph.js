@@ -11,7 +11,7 @@ const LineGraph = (props)=>{
     const values = []
     chartDataArr.forEach(element => {
         labels.push(element.label)
-        values.push(element.average)
+        values.push(element.close)
     });
     const data = {
         labels: labels,//['January', 'February', 'March', 'April', 'May', 'June', 'July'],
