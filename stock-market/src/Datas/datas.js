@@ -96,6 +96,6 @@ const res_chart = [
         "changeOverTime": 0,
         "marketChangeOverTime": 0
     },
-    {...},
-    {...}
+    {},
+    {}
 ]

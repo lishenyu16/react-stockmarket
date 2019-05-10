@@ -1,0 +1,9 @@
+.News{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+
+}
+hr{
+    width:90%;
+}

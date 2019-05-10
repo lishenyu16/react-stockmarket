@@ -14,7 +14,7 @@ export const getStockDetailSuccess = (arr)=>{
         stockDetails: arr
     }
 }
-export const getStockDetail = (symbol,range)=>{
+export const getStockDetail = (symbol,range,chartInterval)=>{
 
     return dispatch=>{
         axios.all(
@@ -22,7 +22,7 @@ export const getStockDetail = (symbol,range)=>{
                 axios.get(`/stock/${symbol}/quote`),
                 axios.get(`/stock/${symbol}/logo`),
                 axios.get(`/stock/${symbol}/news`),
-                axios.get(`/stock/${symbol}/chart/${range}`)
+                axios.get(`/stock/${symbol}/chart/${range}?chartInterval=${chartInterval}`)
             ]
         )
         .then(axios.spread((quoteRes,logoRes,newsRes,chartRes)=> {

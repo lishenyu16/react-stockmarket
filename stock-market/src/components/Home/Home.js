@@ -14,7 +14,6 @@ const Home = (props)=>{
     return (
         <div className={styles.Home}>
             <div>
-                <a href="https://iexcloud.io" target="_blank">Data provided by IEX Cloud</a>
                 <h2>Market Closed</h2>
                 <h2>Investing: ${props.totalValue.toLocaleString()}</h2>
                 <h2>{statement}</h2> 
@@ -22,6 +21,7 @@ const Home = (props)=>{
             <Stocks stocks={props.userStocks} />
             <h2>Market</h2>
             <Stocks stocks={props.marketStocks} />
+            <a href="https://iexcloud.io" target="_blank">Data provided by IEX Cloud</a>
         </div>
     )
 }

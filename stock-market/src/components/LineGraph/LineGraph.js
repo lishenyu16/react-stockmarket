@@ -6,15 +6,22 @@ import styles from './LineGraph.module.css'
 
 const LineGraph = (props)=>{
 
+    let chartDataArr = props.chartData
+    const labels = []
+    const values = []
+    chartDataArr.forEach(element => {
+        labels.push(element.label)
+        values.push(element.average)
+    });
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: labels,//['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
           {
             label: props.symbol,
             fill: false,
             lineTension: 0.1,
             borderColor: 'rgba(75,192,192,1)',
-            data: [100, 59, 80, 81, 56, 55, 40,65, 59, 80, 81, 56, 55, 1]
+            data: values//[50,80,20,70,10,90,120,30,90,40,60,100,25,40]
           }
         ]
     };
