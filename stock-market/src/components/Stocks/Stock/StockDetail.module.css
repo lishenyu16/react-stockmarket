@@ -14,6 +14,27 @@
     margin: 0 auto;
     flex-wrap: wrap;
 }
+.rangeChoice{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding:0 0.5rem;
+}
+.rangeChoice button{
+    padding:1rem;
+    margin:0 0.1rem;
+    cursor: pointer;
+    border:none;
+}
+.rangeChoice button:active,
+.rangeChoice button:hover{
+    background-color: aqua;
+}   
+.RangeChoiceActive{
+    background-color: aqua;
+}   
 .head{
     width:60%;
 }

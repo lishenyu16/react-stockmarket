@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import styles from './StockDetail.module.css'
 import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -7,10 +7,18 @@ import News from '../../News/News'
 import * as actions from '../../../store/actions'
 
 const StockDetail = (props)=>{
-    // console.log(props.match)
+    const [range,setRange] = useState('1d')
+    const [chartInterval,setChartInterval] = useState(5)
+    const [activeRange,setActiveRange] = useState('1d')
+
     let symbol = props.match.params.symbol
+
+    if(range!=='1d'){
+        setChartInterval(null)
+    }
     useEffect(()=>{
-        props.getSingleStock(symbol,'1d')
+        //1d 5d 1m 3m 6m 1y 2y 5y ytd
+        props.getSingleStock(symbol,range,chartInterval)
     },[])
     function abbreviateNumber(value) {
         if(value){
@@ -28,6 +36,10 @@ const StockDetail = (props)=>{
             return newValue;
         }       
     }
+    function selectRange(range){
+        setActiveRange(range)
+    }
+    
       
     let quote_component = null
     if(props.quote.latestPrice){
@@ -40,6 +52,15 @@ const StockDetail = (props)=>{
                             <div className={styles.logo}>
                                 <img src={props.logo}></img>
                             </div>
+                            <ul className={styles.rangeChoice}>
+                                <button onClick={()=>selectRange('1d')} className={activeRange=='1d'?styles.RangeChoiceActive:null}>1d</button>
+                                <button onClick={()=>selectRange('5d')} className={activeRange=='5d'?styles.RangeChoiceActive:null}>5d</button>
+                                <button onClick={()=>selectRange('1m')} className={activeRange=='1m'?styles.RangeChoiceActive:null}>1m</button>
+                                <button onClick={()=>selectRange('3m')} className={activeRange=='3m'?styles.RangeChoiceActive:null}>3m</button>
+                                <button onClick={()=>selectRange('6m')} className={activeRange=='6m'?styles.RangeChoiceActive:null}>6m</button>
+                                <button onClick={()=>selectRange('1y')} className={activeRange=='1y'?styles.RangeChoiceActive:null}>1y</button>
+                                <button onClick={()=>selectRange('3y')} className={activeRange=='3y'?styles.RangeChoiceActive:null}>3y</button>
+                            </ul>
                             <hr></hr>
                             <LineGraph symbol={symbol} chartData={props.chart}></LineGraph>
                         </div>
@@ -119,7 +140,7 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = (dispatch)=>{
     return {
-        getSingleStock: (symbol,range)=>dispatch(actions.getStockDetail(symbol,range))
+        getSingleStock: (symbol,range,chartInterval)=>dispatch(actions.getStockDetail(symbol,range,chartInterval))
     }
 }
 
