@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-stockmarket/static/css/main.9600569a.chunk.css",
+    "main.js": "/react-stockmarket/static/js/main.bac56cc4.chunk.js",
+    "main.js.map": "/react-stockmarket/static/js/main.bac56cc4.chunk.js.map",
+    "runtime~main.js": "/react-stockmarket/static/js/runtime~main.a328085b.js",
+    "runtime~main.js.map": "/react-stockmarket/static/js/runtime~main.a328085b.js.map",
+    "static/js/2.57e24081.chunk.js": "/react-stockmarket/static/js/2.57e24081.chunk.js",
+    "static/js/2.57e24081.chunk.js.map": "/react-stockmarket/static/js/2.57e24081.chunk.js.map",
+    "index.html": "/react-stockmarket/index.html",
+    "precache-manifest.4cfd7370d593c7ae9918a560a0928e87.js": "/react-stockmarket/precache-manifest.4cfd7370d593c7ae9918a560a0928e87.js",
+    "service-worker.js": "/react-stockmarket/service-worker.js",
+    "static/css/main.9600569a.chunk.css.map": "/react-stockmarket/static/css/main.9600569a.chunk.css.map",
+    "static/media/logo.png": "/react-stockmarket/static/media/logo.d362671e.png"
+  }
+}
