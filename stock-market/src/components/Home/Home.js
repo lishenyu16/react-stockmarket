@@ -7,6 +7,7 @@ import * as actions from '../../store/actions/index'
 const Home = (props)=>{
     useEffect(()=>{
         props.getMarketStocks()
+        props.checkAuthState()
     },[])
 
     // console.log(props.marketStocks)
@@ -21,7 +22,7 @@ const Home = (props)=>{
             <Stocks stocks={props.userStocks} />
             <h2>Market</h2>
             <Stocks stocks={props.marketStocks} />
-            <a href="https://iexcloud.io" target="_blank">Data provided by IEX Cloud</a>
+            <a href="https://iexcloud.io" target="_blank" className={styles.iexUrl}>Data provided by IEX Cloud</a>
         </div>
     )
 }
@@ -36,7 +37,8 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = (dispatch)=>{
     return {
-        getMarketStocks: ()=>dispatch(actions.getMarketStocks())
+        getMarketStocks: ()=>dispatch(actions.getMarketStocks()),
+        checkAuthState: ()=>dispatch(actions.checkAuthState())
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Home)

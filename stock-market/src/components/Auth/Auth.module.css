@@ -1,0 +1,83 @@
+.Switch{
+    margin: 5rem auto 0;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border:1px solid #eee;
+    box-sizing: border-box;
+    box-shadow: 5px 5px 10px #eee;
+}
+.Switch button:active{
+    background-color:black;
+}
+.SwitchButton{
+    width: 50%;
+    outline: none;
+    border:none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: center;
+    padding: 0.5rem;
+    margin: 0;
+}
+.SwitchSignup{
+    background-color:lightgreen
+}
+.SwitchSignin{
+    background-color:lightpink
+}
+.SwitchButton:hover, .SwitchButton:active{
+    background-color:black;
+    color:white;
+}
+.SwitchActive{
+    background-color:black;
+    color:white;
+}
+
+.ContactData{
+    margin: 20px auto;
+    width: 60%;
+    text-align: center;
+    border:1px solid #eee;
+    box-sizing: border-box;
+    padding: 1rem;
+    box-shadow: 5px 5px 10px #eee;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SignUp{
+    background-color: #DAD735;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #966909;
+    color: #966909;
+    font-family: inherit;
+    font-size: 1em;
+    padding: 10px 20px;
+    box-shadow: 2px 2px 2px #966909;
+}
+
+.SignUp:disabled {
+    background-color: #C7C6C6;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+    color: #888888;
+}
+
+.SignUp:not(:disabled) {
+    animation: enable 0.3s linear;
+}
+
+@media(min-widh: 600px){
+    .ContactData{
+        width: 500px;
+    }
+}
