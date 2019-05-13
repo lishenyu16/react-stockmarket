@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react'
 import styles from './Home.module.css'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import Stocks from '../Stocks/Stocks'
 import * as actions from '../../store/actions/index'
 
@@ -15,7 +16,9 @@ const Home = (props)=>{
     return (
         <div className={styles.Home}>
             <div>
-                <h2>Market Closed</h2>
+                <p>This is a stock trade simulator website.  </p>
+                <p>Each registered user will be given an initial $10,000 virtual dollars to trade the stocks. All the datas displayed here are real-time datas of stock market.</p>
+                <p>Just <Link to='/auth'>SIGN IN</Link> and play, explore your talents hidden deep inside you, maybe you are the next wolf of the Wall Street!</p>
                 <h2>Investing: ${props.totalValue.toLocaleString()}</h2>
                 <h2>{statement}</h2> 
             </div>

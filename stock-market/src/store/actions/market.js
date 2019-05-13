@@ -43,7 +43,7 @@ export const getMarketStocksSuccess = (data)=>{
 }
 export const getMarketStocks = ()=>{
     return dispatch =>{
-        axios.get('/stock/market/batch?symbols=aapl,fb,tsla,goog,baba,twtr&types=quote&range=1d&last=5')
+        axios.get('/stock/market/batch?symbols=aapl,fb,tsla,goog,baba,twtr,msft,ba,intc,snap,nflx,techy&types=quote&range=1d&last=5')
             .then(res=>{
                 dispatch(getMarketStocksSuccess(res.data))
             })

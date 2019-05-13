@@ -9,17 +9,30 @@
     border-bottom: 1px solid lightgray;
 }
 .symbol{
-    width:auto;
+    width:30%;
     font-size: 1.5rem;
     padding:0.2rem 0.5rem;
 }
 .price{
-    width:auto;
+    width:30%;
     margin:0;
     padding:0.5rem;
     border-radius:10px;
 }
+.change{
+    width:36%;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.change_period{
+    width:auto;
+    font-size: 0.7rem;
+
+}
 .shares{
+    display: none;
     width:30%;
     padding:0.2rem;
     margin:0;
@@ -34,5 +47,19 @@
     .symbol{
         width:100%;
         font-size: 1.5rem;
+    }
+    .price{
+        width:40%;
+    }
+    .change{
+        width:55%;
+        margin:0;
+    }
+    .change_period{
+        width:auto;
+        font-size: 0.8rem;
+    }
+    .shares{
+        display: block;
     }
 }

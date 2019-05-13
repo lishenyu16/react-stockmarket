@@ -1,8 +1,12 @@
 .Home{
-    margin-top:5rem;
+    margin:5rem 0 3rem;
     box-sizing: border-box;
     padding:0 1rem;
     width:100%;
+}
+
+.Home p{
+    font-family: 'Stylish', sans-serif;
 }
 .iexUrl{
     display: none;
