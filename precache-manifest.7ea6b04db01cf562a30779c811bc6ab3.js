@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5cf61bb7e61c644f4e5fccc161c9a4b7",
+    "revision": "9e32449762ba97e0a0b1cb780d9bb52a",
     "url": "/react-stockmarket/index.html"
   },
   {
-    "revision": "cb1c6265336e8527cd29",
-    "url": "/react-stockmarket/static/css/main.9600569a.chunk.css"
+    "revision": "8a67dfcecc287ce18e83",
+    "url": "/react-stockmarket/static/css/main.b274a657.chunk.css"
   },
   {
-    "revision": "10cb45d70fe859b8c817",
-    "url": "/react-stockmarket/static/js/2.57e24081.chunk.js"
+    "revision": "eb79d5c7dd024dfc30dc",
+    "url": "/react-stockmarket/static/js/2.e74ffaf1.chunk.js"
   },
   {
-    "revision": "cb1c6265336e8527cd29",
-    "url": "/react-stockmarket/static/js/main.bac56cc4.chunk.js"
+    "revision": "8a67dfcecc287ce18e83",
+    "url": "/react-stockmarket/static/js/main.9d938c93.chunk.js"
   },
   {
     "revision": "22d0c00d6434170eb888",
