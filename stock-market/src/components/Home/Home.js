@@ -11,14 +11,17 @@ const Home = (props)=>{
         props.checkAuthState()
     },[])
 
-    // console.log(props.marketStocks)
+    let signinstatement = null
+    if(!props.isAuthenticated){
+        signinstatement = <p>Just <Link to='/auth'>SIGN IN</Link> and play, explore your talents hidden deep inside you, maybe you are the next wolf of the Wall Street!</p>
+    }
     let statement = props.userStocks.length>0?"Your Stocks":"Your stocks bucket is empty"
     return (
         <div className={styles.Home}>
             <div>
                 <p>This is a stock trade simulator website.  </p>
                 <p>Each registered user will be given an initial $10,000 virtual dollars to trade the stocks. All the datas displayed here are real-time datas of stock market.</p>
-                <p>Just <Link to='/auth'>SIGN IN</Link> and play, explore your talents hidden deep inside you, maybe you are the next wolf of the Wall Street!</p>
+                {signinstatement}
                 <h2>Investing: ${props.totalValue.toLocaleString()}</h2>
                 <h2>{statement}</h2> 
             </div>
@@ -35,7 +38,8 @@ const mapStateToProps = (state)=>{
     return {
         marketStocks: state.market.marketStocks,
         totalValue: state.portfolio.totalValue,
-        userStocks: state.portfolio.stocks
+        userStocks: state.portfolio.stocks,
+        isAuthenticated: state.auth.isLoggedIn
     }
 }
 const mapDispatchToProps = (dispatch)=>{

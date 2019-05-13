@@ -48,7 +48,9 @@ const StockDetail = (props)=>{
         }
         
     }
-    
+    function goback(){
+        props.history.goBack()
+    }
       
     let quote_component = null
     if(props.quote.latestPrice){
@@ -82,6 +84,7 @@ const StockDetail = (props)=>{
 
     return (
         <div className={styles.StockDetail}>
+            <div className={styles.backbutton} onClick={goback}>&#10094; Back</div>
             {quote_component}
             {userPosition}
             <div className={styles.stats}>

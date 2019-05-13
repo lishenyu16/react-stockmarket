@@ -19,7 +19,7 @@ const navigationItems = (props)=>{
     let authMethod = <NavItem link="/auth">Sign In</NavItem>
     let dashboard = null
     if(props.isLoggedIn){
-        dashboard = <NavItem link="/me">Me</NavItem>
+        dashboard = <NavItem link="/dashboard">Account</NavItem>
         authMethod = <NavItem link="/logout">Logout</NavItem> // <button onClick={this.props.onLogout}>Logout</button>
     }
     return (

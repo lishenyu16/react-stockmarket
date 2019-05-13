@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom'
 import Topbar from './components/Navigation/Topbar/Topbar'
 import Home from './components/Home/Home'
+import Dashboard from './components/Dashboard/Dashboard'
 import Auth from './components/Auth/Auth'
 import Logout from './components/Auth/Logout'
 import StockDetail from './components/Stocks/Stock/StockDetail'
@@ -32,6 +33,7 @@ const App = (props)=>{
                 <Route path="/stocks/:symbol" component={StockDetail}></Route>
                 <Route path="/" exact component={Home}></Route>
                 <Route path="/logout" component={Logout}></Route>
+                <Route path="/dashboard" component={Dashboard}></Route>
                 <Route path="/auth" component={Auth}></Route>
                 <Redirect to='/' />
             </Switch>

@@ -6,6 +6,11 @@
     flex-wrap: wrap;
     box-sizing: border-box;
 }
+.backbutton{
+    width:100%;
+    font-size: 1rem;
+    cursor: pointer;
+}
 .Name_Price_Chart{
     width:100%;
     display: flex;
@@ -97,6 +102,10 @@ hr{
     padding: 0.5rem;
 }
 @media(min-width:500px){
+    .backbutton{
+        font-size: 1.5rem;
+        padding-left:2rem;
+    }
     .head{
         margin:0 auto;
     }
