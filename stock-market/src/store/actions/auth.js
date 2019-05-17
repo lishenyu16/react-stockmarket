@@ -36,6 +36,7 @@ export const auth = (username,email,password)=>{
     return dispatch=>{
         axios().post('/register',authData)
             .then(res=>{
+                localStorage.setItem('userId',res.data.userId)
                 localStorage.setItem('username',res.data.username)
                 localStorage.setItem('email',res.data.email)
                 localStorage.setItem('token',res.data.token)
@@ -57,6 +58,7 @@ export const authSignIn = (email,password)=>{
         axios().post('/login',authData)
             .then(res=>{
                 console.log(res.data)
+                localStorage.setItem('userId',res.data.userId)
                 localStorage.setItem('username',res.data.username)
                 localStorage.setItem('email',res.data.email)
                 localStorage.setItem('token',res.data.token)

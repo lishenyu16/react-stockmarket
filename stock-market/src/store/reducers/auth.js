@@ -1,12 +1,14 @@
 
 const initialState = {
+    userId:null,
     username:null,
     email:null,
     token:null,
     expirationDate:null,
     isAdmin:false,
     error:null,
-    isLoggedIn:false
+    isLoggedIn:false,
+    buyingPower: 0
 }
 
 const reducer = (state=initialState,action) => {
@@ -19,12 +21,14 @@ const reducer = (state=initialState,action) => {
         case('auth_success'):
             return {
                 ...state,
+                userId:action.authData.userId,
                 username:action.authData.username,
                 email:action.authData.email,
                 token:action.authData.idToken,
                 isAdmin:action.authData.isAdmin,
                 expirationDate:action.authData.expirationDate,
-                isLoggedIn: true
+                isLoggedIn: true,
+                buyingPower:action.authData.buyingPower
             }
         case('logout'):
             return {
@@ -42,6 +46,7 @@ const reducer = (state=initialState,action) => {
             const currentDate = new Date()
             if(localStorage.getItem('token')){
                 if(currentDate>=expirationDate){
+                    localStorage.removeItem('userId')
                     localStorage.removeItem('username')
                     localStorage.removeItem('email')
                     localStorage.removeItem('isAdmin')
@@ -49,6 +54,7 @@ const reducer = (state=initialState,action) => {
                     localStorage.removeItem('expirationDate')
                     return { //expired: 
                         ...state,
+                        userId:null,
                         username:null,
                         email:null,
                         token:null,
@@ -60,6 +66,7 @@ const reducer = (state=initialState,action) => {
                 }else{
                     return {
                         ...state,
+                        userId:localStorage.getItem('userId'),
                         token:localStorage.getItem('token'),
                         username:localStorage.getItem('username'),
                         email:localStorage.getItem('email'),

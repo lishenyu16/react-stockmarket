@@ -39,7 +39,7 @@
 }
 @media(min-width:500px){
     .Stock{
-        width:21%;
+        width:30%;
         border: 1px solid lightgray;
         margin:0.2rem;
         box-shadow: 5px 5px 5px rgba(135, 206, 250);
@@ -61,5 +61,10 @@
     }
     .shares{
         display: block;
+    }
+}
+@media(min-width:1000px){
+    .Stock{
+        width:21%;
     }
 }

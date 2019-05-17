@@ -5,6 +5,44 @@
     margin:5rem 0;
 }
 .welcome{
-    padding:0 20%;
+    padding:0 10%;
     font-size: 1.5rem;
+}
+.position{
+    padding:0 10%;
+    display: flex;
+    flex-direction: column;
+}
+.position h2{
+    margin:0.8% 0;
+    margin-right:0.5%;
+}
+.buyingpower{
+    padding:0 10%;
+    display: flex;
+    margin:1% 0;
+}
+.buyingpowertext{
+    font-size: 0.8rem;
+    margin-right:0.5rem;
+    padding:0.1rem;
+    background-color: black;
+    color:white;
+    border-radius: 5px;
+}
+.stocks{
+    display: flex;
+    flex-direction: column;
+    padding:0 5%;
+}
+.orders{
+    padding:0 5%;
+}
+@media(min-width:500px){
+    .welcome{
+        padding:0 20%;
+    }
+    .position{
+        flex-direction: row;
+    }
 }

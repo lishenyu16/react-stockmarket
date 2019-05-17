@@ -12,11 +12,6 @@ const StockDetail = (props)=>{
     const [activeRange,setActiveRange] = useState('1d')
 
     let symbol = props.match.params.symbol
-
-    // if(range!=='1d'){
-    //     console.log('it again!')
-    //     setChartInterval(null)
-    // }
     useEffect(()=>{
         //1d 5d 1m 3m 6m 1y 2y 5y ytd
         props.getSingleStock(symbol,range,chartInterval)
@@ -58,7 +53,7 @@ const StockDetail = (props)=>{
                         <div className={styles.Name_Price_Chart}>
                             <div className={styles.head}>
                                 <div className={styles.headline}>{props.quote.companyName}</div>
-                                <div className={styles.headline} style={{fontFamily: "'Lora', serif"}}>${props.quote.close.toLocaleString()}</div>
+                                <div className={styles.headline} style={{fontFamily: "'Lora', serif"}}>${props.quote.latestPrice.toLocaleString()}</div>
                             </div>
                             <div className={styles.logo}>
                                 <img src={props.logo}></img>
@@ -79,13 +74,66 @@ const StockDetail = (props)=>{
     
     let userPosition = null
     if(props.userStocks.length>0){
-        userPosition = <div className={styles.position}>Your Position</div>
+        // let orders = props.orders
+        // let symbolOrders = orders.filter(item=>item.)
+        let stock = props.userStocks.find(item=>{return item.symbol==symbol.toLowerCase()})
+        userPosition = <div className={styles.position}>
+                            <div className={styles.positionTitle}>Your Position</div>
+                            <div className={styles.positionBody}>
+                                <div className={styles.positionItem}>
+                                    <div className={styles.statsProp}>SHARES</div>
+                                    <div>{stock.shares}</div>
+                                </div>
+                                <div className={styles.positionItem}>
+                                    <div className={styles.statsProp}>EQUITY</div>
+                                    <div>${stock.shares * props.quote.latestPrice}</div>
+                                </div>
+                                <div className={styles.positionItem}>
+                                    <div className={styles.statsProp}>AVG COST</div>
+                                    <div></div>
+                                </div>
+                                <div className={styles.positionItem}>
+                                    <div className={styles.statsProp}>TODAY'S RETURN</div>
+                                    <div>${stock.shares*(props.quote.latestPrice-props.quote.previousClose).toLocaleString()}</div>
+                                </div>
+                                <div className={styles.positionItem}>
+                                    <div className={styles.statsProp}>TOTAL RETURN</div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
     }
 
     return (
         <div className={styles.StockDetail}>
             <div className={styles.backbutton} onClick={goback}>&#10094; Back</div>
             {quote_component}
+            <div className={styles.trade}>
+                <div className={styles.tradeTitle}>Trade</div>
+                <div className={styles.type}>
+                    <label>
+                        <input
+                            type="radio"
+                            name="type"
+                            value="Buy"
+                            checked={true}
+                        />
+                        Buy
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="type"
+                            value="Sell"
+                            checked={false}
+                        />
+                        Sell
+                    </label>
+                </div>
+                <div className={styles.order}>order</div>
+                <div className={styles.price}>price</div>
+                <div className={styles.review}>review</div>
+            </div>
             {userPosition}
             <div className={styles.stats}>
                 <div className={styles.statsTitle}>Stats</div>
@@ -127,8 +175,8 @@ const StockDetail = (props)=>{
                         <div>{props.quote.week52Low}</div>
                     </div>
                     <div className={styles.statsItem}>
-                        <div className={styles.statsProp}>DIV/YIELD</div>
-                        <div>-</div>
+                        <div className={styles.statsProp}>EXTENDED PRICE</div>
+                        <div>{props.quote.extendedPrice}</div>
                     </div>
 
                 </div>
@@ -147,7 +195,8 @@ const mapStateToProps = (state)=>{
         logo: state.market.logo,
         news: state.market.stockNews,
         chart: state.market.chart,
-        userStocks: state.portfolio.stocks
+        userStocks: state.portfolio.stocks,
+        orders: state.portfolio.orders
     }
 }
 const mapDispatchToProps = (dispatch)=>{

@@ -59,8 +59,52 @@ hr{
     width: 100%;
     border: 1px dotted lightgray;
 }
+.trade{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+
+}
+.tradeTitle{
+    width:90%;
+    font-size: 1.5rem;
+    padding: 0.5rem;   
+}
+.trade .type{
+    padding:0 10%;
+    width:100%;
+}
+.trade .order{
+    padding:0 10%;
+    width:100%;
+}
+.trade .price{
+    padding:0 10%;
+    width:100%;
+}
+.trade .review{
+    padding:0 10%;
+    width:100%;
+}
 .position{
     width:100%;
+}
+.positionTitle{
+    width:90%;
+    font-size: 1.5rem;
+    padding: 0.5rem;  
+}
+.positionBody{
+    /* padding-left:10%; */
+    display: flex;
+    flex-wrap: wrap;
+    width:90%;
+}
+.positionItem{
+    width:40%;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
 }
 .stats{
     width:100%;
@@ -118,6 +162,9 @@ hr{
         margin-left: 3rem;
     }
     .news{
+        margin-left: 3rem;
+    }
+    .position{
         margin-left: 3rem;
     }
 }
