@@ -15,15 +15,13 @@ const StockDetail = (props)=>{
     const [tradeType, setTradeType] = useState('buy')
     const [quantity, setQuantity] = useState(0)
     const [orderType, setOrderType] = useState('Market')
+    const [loading, setLoading] = useState(false)
 
     let symbol = props.match.params.symbol
     useEffect(()=>{
         //1d 5d 1m 3m 6m 1y 2y 5y ytd
         props.getSingleStock(symbol,range,chartInterval)
     },[range])
-    useEffect(()=>{
-
-    },[props.tradeLoading])
     function abbreviateNumber(value) {
         if(value){
             let newValue = value;
@@ -128,15 +126,16 @@ const StockDetail = (props)=>{
         setOrderType(event.target.value)
     }
     const handleSubmit = ()=> {
-        const order = {userId:localStorage.getItem('userId'), symbol, shares:quantity, operation:tradeType}
+        setLoading(true)
+        const order = {userId:localStorage.getItem('userId'), symbol:symbol.toLowerCase(), shares:quantity, operation:tradeType}
         props.placeOrder(order)
     }
     let redirect = null
     if(props.tradingSuccess){
         redirect = <Redirect to="/dashboard" />
     }
-    let tradeComponent = <Spinner />
-    if(!props.tradeLoading){
+    let tradeComponent= null
+    if(!loading){
         tradeComponent = (
             <div className={styles.trade}>
                 <div className={styles.tradeTitle}>Trade</div>
@@ -198,6 +197,9 @@ const StockDetail = (props)=>{
                 </div>
             </div>
         ) 
+    }
+    else{
+        tradeComponent = <Spinner />
     }
     return (
         <div className={styles.StockDetail}>
