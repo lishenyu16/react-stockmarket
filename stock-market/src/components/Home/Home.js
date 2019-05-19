@@ -18,6 +18,9 @@ const Home = (props)=>{
     useEffect(()=>{
         props.getUserHomeStocks()
     },[props.userStocks])
+    useEffect(()=>{
+        props.initTrade()
+    },[])
 
     let signinstatement = null
     if(!props.isAuthenticated){
@@ -32,10 +35,10 @@ const Home = (props)=>{
                 <p>This is a stock trade simulator website.  </p>
                 <p>Each registered user will be given an initial $10,000 virtual dollars to trade the stocks. All the datas displayed here are real-time datas of stock market.</p>
                 {signinstatement}
-                <h2>Your Position: ${(props.totalValue + props.buyingPower).toLocaleString()}</h2>
+                <h2>Your Position: ${props.isAuthenticated?(props.totalValue + props.buyingPower).toLocaleString():'10000'.toLocaleString()}</h2>
                 <h2>{statement}</h2> 
             </div>
-            <Stocks stocks={props.userRealStocks} />
+            {props.isAuthenticated?<Stocks stocks={props.userRealStocks} />:null}
             <h2>Market</h2>
             <Stocks stocks={props.marketStocks} />
             <a href="https://iexcloud.io" target="_blank" className={styles.iexUrl}>Data provided by IEX Cloud</a>
@@ -62,7 +65,8 @@ const mapDispatchToProps = (dispatch)=>{
         getUserStocks:(id)=>dispatch(actions.getUserStocks(id)),
         getBuyingPower: (id)=>dispatch(actions.getUserBuyingPower(id)),
         getTotalValue: ()=>dispatch(actions.getTotalValue()),
-        getUserHomeStocks: ()=>dispatch(actions.getUserHomeStocks())
+        getUserHomeStocks: ()=>dispatch(actions.getUserHomeStocks()),
+        initTrade: ()=>dispatch({type:'initTrade'})
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Home)

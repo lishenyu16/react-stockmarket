@@ -94,7 +94,7 @@ const StockDetail = (props)=>{
                         </div>
                         <div className={styles.positionItem}>
                             <div className={styles.statsProp}>EQUITY</div>
-                            <div>${stock.shares * props.quote.latestPrice}</div>
+                            <div>${props.quote.latestPrice?parseFloat(stock.shares * props.quote.latestPrice).toFixed(2).toLocaleString():null}</div>
                         </div>
                         <div className={styles.positionItem}>
                             <div className={styles.statsProp}>AVG COST</div>
@@ -132,7 +132,7 @@ const StockDetail = (props)=>{
     }
     let redirect = null
     if(props.tradingSuccess){
-        redirect = <Redirect to="/dashboard" />
+        redirect = <Redirect to="/" />
     }
     let tradeComponent= null
     if(!loading){
