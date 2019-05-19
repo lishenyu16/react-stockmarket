@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import styles from './StockDetail.module.css'
-import { withRouter } from 'react-router-dom'
+import {Redirect, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
 import LineGraph from '../../../components/LineGraph/LineGraph'
 import News from '../../News/News'
+import Spinner from '../../UI/Spinner/Spinner'
 import * as actions from '../../../store/actions'
 
 const StockDetail = (props)=>{
@@ -11,11 +12,18 @@ const StockDetail = (props)=>{
     const [chartInterval,setChartInterval] = useState(5)
     const [activeRange,setActiveRange] = useState('1d')
 
+    const [tradeType, setTradeType] = useState('buy')
+    const [quantity, setQuantity] = useState(0)
+    const [orderType, setOrderType] = useState('Market')
+
     let symbol = props.match.params.symbol
     useEffect(()=>{
         //1d 5d 1m 3m 6m 1y 2y 5y ytd
         props.getSingleStock(symbol,range,chartInterval)
     },[range])
+    useEffect(()=>{
+
+    },[props.tradeLoading])
     function abbreviateNumber(value) {
         if(value){
             let newValue = value;
@@ -76,64 +84,127 @@ const StockDetail = (props)=>{
     if(props.userStocks.length>0){
         // let orders = props.orders
         // let symbolOrders = orders.filter(item=>item.)
-        let stock = props.userStocks.find(item=>{return item.symbol==symbol.toLowerCase()})
-        userPosition = <div className={styles.position}>
-                            <div className={styles.positionTitle}>Your Position</div>
-                            <div className={styles.positionBody}>
-                                <div className={styles.positionItem}>
-                                    <div className={styles.statsProp}>SHARES</div>
-                                    <div>{stock.shares}</div>
-                                </div>
-                                <div className={styles.positionItem}>
-                                    <div className={styles.statsProp}>EQUITY</div>
-                                    <div>${stock.shares * props.quote.latestPrice}</div>
-                                </div>
-                                <div className={styles.positionItem}>
-                                    <div className={styles.statsProp}>AVG COST</div>
-                                    <div></div>
-                                </div>
-                                <div className={styles.positionItem}>
-                                    <div className={styles.statsProp}>TODAY'S RETURN</div>
-                                    <div>${stock.shares*(props.quote.latestPrice-props.quote.previousClose).toLocaleString()}</div>
-                                </div>
-                                <div className={styles.positionItem}>
-                                    <div className={styles.statsProp}>TOTAL RETURN</div>
-                                    <div></div>
-                                </div>
-                            </div>
+        let stock = props.userStocks.find(item=>{return item.symbol.toLowerCase()==symbol.toLowerCase()})
+        if(stock!=undefined){
+            userPosition = (
+                <div className={styles.position}>
+                    <div className={styles.positionTitle}>Your Position</div>
+                    <div className={styles.positionBody}>
+                        <div className={styles.positionItem}>
+                            <div className={styles.statsProp}>SHARES</div>
+                            <div>{stock.shares}</div>
                         </div>
+                        <div className={styles.positionItem}>
+                            <div className={styles.statsProp}>EQUITY</div>
+                            <div>${stock.shares * props.quote.latestPrice}</div>
+                        </div>
+                        <div className={styles.positionItem}>
+                            <div className={styles.statsProp}>AVG COST</div>
+                            <div></div>
+                        </div>
+                        <div className={styles.positionItem}>
+                            <div className={styles.statsProp}>TODAY'S RETURN</div>
+                            <div>${stock.shares*(props.quote.latestPrice-props.quote.previousClose).toLocaleString()}</div>
+                        </div>
+                        <div className={styles.positionItem}>
+                            <div className={styles.statsProp}>TOTAL RETURN</div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        else{
+            userPosition=null
+        }
     }
-
-    return (
-        <div className={styles.StockDetail}>
-            <div className={styles.backbutton} onClick={goback}>&#10094; Back</div>
-            {quote_component}
+    const handleTradeTypeChange = (event)=>{
+        setTradeType(event.target.value)
+    }
+    const handleQuantityInput = (event) =>{
+        setQuantity(event.target.value)
+    }
+    const handleOrderTypeChange = (event) =>{
+        setOrderType(event.target.value)
+    }
+    const handleSubmit = ()=> {
+        const order = {userId:localStorage.getItem('userId'), symbol, shares:quantity, operation:tradeType}
+        props.placeOrder(order)
+    }
+    let redirect = null
+    if(props.tradingSuccess){
+        redirect = <Redirect to="/dashboard" />
+    }
+    let tradeComponent = <Spinner />
+    if(!props.tradeLoading){
+        tradeComponent = (
             <div className={styles.trade}>
                 <div className={styles.tradeTitle}>Trade</div>
                 <div className={styles.type}>
                     <label>
                         <input
-                            type="radio"
-                            name="type"
-                            value="Buy"
-                            checked={true}
-                        />
-                        Buy
+                            type="radio" name="type"
+                            value="buy"
+                            checked={tradeType === "buy"}
+                            onChange={handleTradeTypeChange} />Buy
                     </label>
                     <label>
                         <input
-                            type="radio"
-                            name="type"
-                            value="Sell"
-                            checked={false}
-                        />
-                        Sell
+                            type="radio" name="type"
+                            value="sell"
+                            checked={tradeType === "sell"}
+                            onChange={handleTradeTypeChange} />Sell
                     </label>
                 </div>
-                <div className={styles.order}>order</div>
-                <div className={styles.price}>price</div>
-                <div className={styles.review}>review</div>
+                <div className={styles.order}>
+                    <label>
+                        Quantity <input type="text" name="quantity" value={quantity}
+                                className={styles.quantityInput}
+                                onChange={handleQuantityInput} />
+                    </label>
+                    <label>
+                        Order Type <select onChange={handleOrderTypeChange} 
+                                className={styles.orderType}
+                                value={orderType}>
+                                <option value='Limit' disabled>Limit Price</option>
+                                <option value='Market'>Market Price</option>
+                                <option value='Stop' disabled>Stop</option>
+                                <option value='Stop Limit' disabled>Stop Limit</option>
+                            </select>
+                    </label>
+                </div>
+                <div className={styles.price}>
+                    <label>
+                        Limit Price <input disabled type="text" name="limitprice" 
+                                className={styles.quantityInput} />
+                    </label>
+                    <label>
+                        Stop Price <input disabled type="text" name="stopprice" 
+                                className={styles.quantityInput} />
+                    </label>
+                    <label>
+                        Expiration <select onChange={handleOrderTypeChange} 
+                                className={styles.orderType}
+                                value={orderType}>
+                                <option value='Day'>Day</option>
+                                <option value='GT90'>GT90</option>
+                                <option value='PreMarket'>Pre Market</option>
+                                <option value='AfterMarket'>After Market</option>
+                            </select>
+                    </label>
+                </div>
+                <div className={styles.submit}>
+                    <button onClick={handleSubmit} className={styles.submitButton}>Submit Order</button>
+                </div>
             </div>
+        ) 
+    }
+    return (
+        <div className={styles.StockDetail}>
+            {redirect}
+            <div className={styles.backbutton} onClick={goback}>&#10094; Back</div>
+            {quote_component}
+            {tradeComponent}
             {userPosition}
             <div className={styles.stats}>
                 <div className={styles.statsTitle}>Stats</div>
@@ -196,12 +267,15 @@ const mapStateToProps = (state)=>{
         news: state.market.stockNews,
         chart: state.market.chart,
         userStocks: state.portfolio.stocks,
-        orders: state.portfolio.orders
+        orders: state.portfolio.orders,
+        tradingSuccess: state.stocks.tradingSuccess,
+        tradeLoading: state.portfolio.tradeLoading
     }
 }
 const mapDispatchToProps = (dispatch)=>{
     return {
-        getSingleStock: (symbol,range,chartInterval)=>dispatch(actions.getStockDetail(symbol,range,chartInterval))
+        getSingleStock: (symbol,range,chartInterval)=>dispatch(actions.getStockDetail(symbol,range,chartInterval)),
+        placeOrder: (order)=>dispatch(actions.placeOrder(order))
     }
 }
 

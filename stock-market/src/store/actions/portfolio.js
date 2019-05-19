@@ -54,7 +54,7 @@ export const getTotalValue = () => {
         let totalValue = 0
         for(let i of userStocks){
             for(let n of marketStocks){
-                if(i.symbol==Object.keys(n)[0].toLowerCase()){
+                if(i.symbol.toLowerCase()==Object.keys(n)[0].toLowerCase()){
                     totalValue += i.shares * Object.values(n)[0].quote.latestPrice
                     break
                 }
@@ -79,7 +79,7 @@ export const getUserHomeStocks = ()=>{
         let u = []
         if(userStocks.length>0){
             for(let i of userStocks){
-                u=u.concat(marketStocks.filter(item=>Object.keys(item)[0].toLocaleLowerCase() == i.symbol))
+                u=u.concat(marketStocks.filter(item=>Object.keys(item)[0].toLocaleLowerCase() == i.symbol.toLocaleLowerCase()))
             }
         }
         dispatch(getUserHomeStocksSuccess(u))       
@@ -98,7 +98,6 @@ export const getUserOrders = ()=>{
     return dispatch =>{
         axios().get(`/orders/${id}`)
         .then(res=>{
-            console.log(res.data)
             dispatch(getUsersOrdersSuccess(res.data))
         })
         .catch(err=>console.log(err))

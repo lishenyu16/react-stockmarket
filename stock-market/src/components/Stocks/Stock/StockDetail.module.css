@@ -63,7 +63,6 @@ hr{
     display: flex;
     flex-wrap: wrap;
     width:100%;
-
 }
 .tradeTitle{
     width:90%;
@@ -71,20 +70,60 @@ hr{
     padding: 0.5rem;   
 }
 .trade .type{
-    padding:0 10%;
+    padding:1% 10%;
     width:100%;
 }
+.trade .type input{
+    margin: 0 0.5rem;
+}
+
 .trade .order{
-    padding:0 10%;
+    padding:1% 0 1% 10%;
     width:100%;
+    display: flex;
+    flex-direction: column;
 }
+
+.quantityInput{
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 3px;
+    font:inherit;
+    margin:0.2rem 0.5rem;
+    width:5rem;
+}
+.orderType{
+    outline: none;
+    border: 1px solid #ccc;
+    background-color:white;
+    padding: 3px;
+    font:inherit;
+    width: 8rem;
+    margin:0.2rem 0;
+}
+
+
 .trade .price{
     padding:0 10%;
     width:100%;
+    display: flex;
+    flex-direction: column;
 }
-.trade .review{
-    padding:0 10%;
+.trade .submit{
+    padding:1% 10%;
     width:100%;
+    text-align: center;
+}
+.submitButton{
+    outline: none;
+    border:1px soid black;
+    border-radius: 5px;
+    background-color: rgb(35, 218, 132);
+    padding:0.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center
 }
 .position{
     width:100%;
@@ -166,5 +205,19 @@ hr{
     }
     .position{
         margin-left: 3rem;
+    }
+    .tradeTitle{
+        margin-left: 3rem;
+    }
+    .trade .order{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .orderType{
+        width:8rem;
+    }
+    .trade .price{
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 }

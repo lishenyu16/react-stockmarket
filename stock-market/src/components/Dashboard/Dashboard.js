@@ -13,6 +13,12 @@ const Dashboard = (props)=>{
     useEffect(()=>{
         props.getUserOrders()
     },[])
+    useEffect(()=>{
+        props.getUserOrders()
+    },[props.userStocks])
+    useEffect(()=>{
+        props.initTrade()
+    },[])
     return (
         <div className={styles.Dashboard}>
             <div className={styles.position}>
@@ -59,7 +65,8 @@ const mapDispatchToProps = (dispatch)=>{
         // getBuyingPower: (id)=>dispatch(actions.getUserBuyingPower(id)),
         // getTotalValue: ()=>dispatch(actions.getTotalValue()),
         getUserHomeStocks: ()=>dispatch(actions.getUserHomeStocks()),
-        getUserOrders : ()=>dispatch(actions.getUserOrders())
+        getUserOrders : ()=>dispatch(actions.getUserOrders()),
+        initTrade : ()=>dispatch({type:'initTrade'})
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Dashboard)

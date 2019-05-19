@@ -17,6 +17,7 @@ export const authFail = (error)=>{
 
 export const logout = ()=>{
     localStorage.removeItem('username')
+    localStorage.removeItem('userId')
     localStorage.removeItem('email')
     localStorage.removeItem('token')
     localStorage.removeItem('isAdmin')
