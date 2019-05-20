@@ -8,15 +8,14 @@ import * as actions from '../../store/actions/index'
 const Home = (props)=>{
     useEffect(()=>{
         props.getMarketStocks()
-        props.checkAuthState()
         props.getUserStocks(localStorage.getItem('userId'))
         props.getBuyingPower(localStorage.getItem('userId')) 
     },[])
     useEffect(()=>{
-        props.getTotalValue(props.userStocks,props.marketStocks)
+        props.getTotalValue(props.userStocks,props.marketStocks)     
     },[props.userStocks])
     useEffect(()=>{
-        props.getUserHomeStocks()
+        props.getUserHomeStocks()      
     },[props.userStocks])
     useEffect(()=>{
         props.initTrade()

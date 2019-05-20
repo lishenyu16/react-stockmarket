@@ -58,7 +58,6 @@ export const authSignIn = (email,password)=>{
     return (dispatch)=>{
         axios().post('/login',authData)
             .then(res=>{
-                console.log(res.data)
                 localStorage.setItem('userId',res.data.userId)
                 localStorage.setItem('username',res.data.username)
                 localStorage.setItem('email',res.data.email)

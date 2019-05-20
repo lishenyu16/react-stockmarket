@@ -1,5 +1,10 @@
 import axios from '../../axiosServer'
 
+let header = {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token')
+    }
+}
 const updateBuyingPower = (data)=>{
     return {
         type:'getUserBuyingPower',
@@ -17,7 +22,7 @@ export const placeOrder = (order)=> {
         dispatch({
             type:'startTrading'
         })
-        axios().post('/stocks/update', order)
+        axios().post('/stocks/update', order,header)
         .then(res=>{
             alert('Order is placed!')
             dispatch(updateBuyingPower(res.data))
