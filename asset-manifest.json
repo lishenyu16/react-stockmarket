@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-stockmarket/static/css/main.1bb7042a.chunk.css",
-    "main.js": "/react-stockmarket/static/js/main.aebb8433.chunk.js",
-    "main.js.map": "/react-stockmarket/static/js/main.aebb8433.chunk.js.map",
-    "runtime~main.js": "/react-stockmarket/static/js/runtime~main.a328085b.js",
-    "runtime~main.js.map": "/react-stockmarket/static/js/runtime~main.a328085b.js.map",
-    "static/js/2.b75a7dd9.chunk.js": "/react-stockmarket/static/js/2.b75a7dd9.chunk.js",
-    "static/js/2.b75a7dd9.chunk.js.map": "/react-stockmarket/static/js/2.b75a7dd9.chunk.js.map",
-    "index.html": "/react-stockmarket/index.html",
-    "precache-manifest.b4ba042e1bb91cb6b734a3b41e769973.js": "/react-stockmarket/precache-manifest.b4ba042e1bb91cb6b734a3b41e769973.js",
-    "service-worker.js": "/react-stockmarket/service-worker.js",
-    "static/css/main.1bb7042a.chunk.css.map": "/react-stockmarket/static/css/main.1bb7042a.chunk.css.map",
-    "static/media/logo.png": "/react-stockmarket/static/media/logo.d362671e.png"
+    "main.css": "/static/css/main.1bb7042a.chunk.css",
+    "main.js": "/static/js/main.a888b7f3.chunk.js",
+    "main.js.map": "/static/js/main.a888b7f3.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.e5e30ab5.chunk.js": "/static/js/2.e5e30ab5.chunk.js",
+    "static/js/2.e5e30ab5.chunk.js.map": "/static/js/2.e5e30ab5.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.afb3bb8b95262b5c956845e088ff1181.js": "/precache-manifest.afb3bb8b95262b5c956845e088ff1181.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.1bb7042a.chunk.css.map": "/static/css/main.1bb7042a.chunk.css.map",
+    "static/media/logo.png": "/static/media/logo.d362671e.png"
   }
 }
