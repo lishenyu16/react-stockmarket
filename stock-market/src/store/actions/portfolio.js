@@ -1,11 +1,6 @@
 // import axios from 'axios';
 import axios from '../../axiosServer'
 
-let header = {
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token')
-    }
-}
 export const getMarketStocksSuccess = (data)=>{
     return {
         type: 'fetchMarketStocks',
@@ -20,6 +15,11 @@ const getUserStocksSuccess = (datas)=>{
     }
 }
 export const getUserStocks = (id)=>{
+    let header = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+    }
     return dispatch =>{
         if(id!==null){
             axios().get('/stocks/' + id,header)
@@ -39,11 +39,15 @@ const getUserBuyingPowerSuccess = (data)=>{
     }
 }
 export const getUserBuyingPower = (id)=>{
-    console.log(header.headers.Authorization)
+    let header = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+    }
     return dispatch =>{
         //1. fetch buying power
         //2. fetch user stocks
-        if(id!==null){
+        if(id!==null&&localStorage.getItem('token'!==null)){
             axios().get(`/getbuyingpower/${id}`,header)
             .then(res=>{
                 dispatch(getUserBuyingPowerSuccess(res.data))
@@ -106,6 +110,11 @@ const getUsersOrdersSuccess = (data)=>{
     }
 }
 export const getUserOrders = ()=>{
+    let header = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+    }
     let id = localStorage.getItem('userId')
     return dispatch =>{
         axios().get(`/orders/${id}`, header)

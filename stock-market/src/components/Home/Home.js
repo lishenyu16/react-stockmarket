@@ -7,6 +7,9 @@ import * as actions from '../../store/actions/index'
 
 const Home = (props)=>{
     useEffect(()=>{
+        props.checkAuthState()
+    },[])
+    useEffect(()=>{
         props.getMarketStocks()
         props.getUserStocks(localStorage.getItem('userId'))
         props.getBuyingPower(localStorage.getItem('userId')) 
@@ -20,6 +23,7 @@ const Home = (props)=>{
     useEffect(()=>{
         props.initTrade()
     },[])
+
 
     let signinstatement = null
     if(!props.isAuthenticated){

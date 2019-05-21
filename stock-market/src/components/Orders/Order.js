@@ -26,7 +26,7 @@ const Order = (props)=>{
             </div>
             <div className={styles.item}>
                 <div className={styles.statsProp}>Total Value:</div>
-                <div>{props.order.shares * props.order.price.toLocaleString()}</div>
+                <div>{(props.order.shares * props.order.price).toLocaleString()}</div>
             </div>
             <hr className={styles.hr} />
         </div>

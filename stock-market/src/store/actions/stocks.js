@@ -1,10 +1,6 @@
 import axios from '../../axiosServer'
 
-let header = {
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token')
-    }
-}
+
 const updateBuyingPower = (data)=>{
     return {
         type:'getUserBuyingPower',
@@ -18,6 +14,11 @@ const placeOrderSuccess = ()=>{
     }
 }
 export const placeOrder = (order)=> {
+    let header = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+    }
     return dispatch=>{
         dispatch({
             type:'startTrading'
