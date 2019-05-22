@@ -102,7 +102,7 @@ const StockDetail = (props)=>{
                         </div>
                         <div className={styles.positionItem}>
                             <div className={styles.statsProp}>TODAY'S RETURN</div>
-                            <div>${stock.shares*(props.quote.latestPrice-props.quote.previousClose).toLocaleString()}</div>
+                            <div>${(stock.shares*(props.quote.latestPrice-props.quote.previousClose)).toFixed(2).toLocaleString()}</div>
                         </div>
                         <div className={styles.positionItem}>
                             <div className={styles.statsProp}>TOTAL RETURN</div>
