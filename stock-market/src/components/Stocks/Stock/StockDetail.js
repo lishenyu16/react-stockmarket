@@ -120,15 +120,37 @@ const StockDetail = (props)=>{
         setTradeType(event.target.value)
     }
     const handleQuantityInput = (event) =>{
-        setQuantity(event.target.value)
+        setQuantity(event.target.value)      
     }
     const handleOrderTypeChange = (event) =>{
         setOrderType(event.target.value)
     }
     const handleSubmit = ()=> {
-        setLoading(true)
-        const order = {userId:localStorage.getItem('userId'), symbol:symbol.toLowerCase(), shares:quantity, operation:tradeType}
-        props.placeOrder(order)
+        if(!Number.isInteger(+quantity)){
+            alert('Please enter an integer')
+        }
+        else if(+quantity<1){
+            alert('Please enter an integer larger than 0')
+        }
+        else{
+            if(tradeType=='buy'){
+                if(props.buyingPower < (+quantity)*props.quote.latestPrice){
+                    return alert('No enough buying power!')
+                }
+                setLoading(true)
+                const order = {userId:localStorage.getItem('userId'), symbol:symbol.toLowerCase(), shares:quantity, operation:tradeType}
+                props.placeOrder(order)
+            }
+            else{
+                let stock = props.userStocks.find(item=>{return item.symbol.toLowerCase()==symbol.toLowerCase()})
+                if( +quantity > stock.shares ){
+                    return alert('No enough shares to sell!')
+                }
+                setLoading(true)
+                const order = {userId:localStorage.getItem('userId'), symbol:symbol.toLowerCase(), shares:quantity, operation:tradeType}
+                props.placeOrder(order)
+            }            
+        }     
     }
     let redirect = null
     if(props.tradingSuccess){
@@ -271,7 +293,8 @@ const mapStateToProps = (state)=>{
         userStocks: state.portfolio.stocks,
         orders: state.portfolio.orders,
         tradingSuccess: state.stocks.tradingSuccess,
-        tradeLoading: state.portfolio.tradeLoading
+        tradeLoading: state.portfolio.tradeLoading,
+        buyingPower: state.portfolio.buyingPower
     }
 }
 const mapDispatchToProps = (dispatch)=>{

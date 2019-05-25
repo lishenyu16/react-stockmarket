@@ -1,5 +1,6 @@
 
 import axios from '../../axiosServer'
+import * as actions from '../../store/actions/index'
 
 export const authSuccess = (authData)=>{
     return {
@@ -64,7 +65,6 @@ export const authSignIn = (email,password)=>{
                 localStorage.setItem('token',res.data.token)
                 localStorage.setItem('isAdmin',res.data.isAdmin)
                 localStorage.setItem('expirationDate',new Date(res.data.expirationDate))
-                //localStorage.setItem('expirationDate',new Date(new Date().getTime() + res.data.expiresIn*1000))
                 dispatch(authSuccess(res.data))
             })
             .catch(err=>{

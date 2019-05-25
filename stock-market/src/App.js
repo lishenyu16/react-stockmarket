@@ -7,6 +7,7 @@ import Auth from './components/Auth/Auth'
 import Logout from './components/Auth/Logout'
 import StockDetail from './components/Stocks/Stock/StockDetail'
 import SideDrawer from './components/Navigation/SideDrawer/SideDrawer'
+import Profile from './components/Profile/Profile'
 import {connect} from 'react-redux'
 
 const App = (props)=>{
@@ -35,6 +36,7 @@ const App = (props)=>{
                 <Route path="/logout" component={Logout}></Route>
                 <Route path="/dashboard" component={Dashboard}></Route>
                 <Route path="/auth" component={Auth}></Route>
+                <Route path="/profile" component={Profile}></Route>
                 <Redirect to='/' />
             </Switch>
         )

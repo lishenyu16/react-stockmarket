@@ -44,10 +44,11 @@ export const getUserBuyingPower = (id)=>{
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
     }
+    console.log('does it come heer?')
     return dispatch =>{
         //1. fetch buying power
         //2. fetch user stocks
-        if(id!==null&&localStorage.getItem('token'!==null)){
+        if(id!==null&&localStorage.getItem('token')!==null){
             axios().get(`/getbuyingpower/${id}`,header)
             .then(res=>{
                 dispatch(getUserBuyingPowerSuccess(res.data))

@@ -1,6 +1,7 @@
 const initialState={
     tradeLoading:false,
-    tradingSuccess: false
+    tradingSuccess: false,
+    error:null
 }
 
 const reducer = (state=initialState,action)=>{
@@ -22,6 +23,13 @@ const reducer = (state=initialState,action)=>{
                 ...state,
                 tradeLoading:false,
                 tradingSuccess: true
+            }
+        case('placeOrderFail'):
+            return {
+                ...state,
+                tradeLoading:false,
+                tradingSuccess: false,
+                error: action.error
             }
         default:
             return state

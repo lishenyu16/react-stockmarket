@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react'
 import NavItem from './NavItem'
 import styles from './NavigationItems.module.css'
 import {connect} from 'react-redux'
@@ -6,26 +6,20 @@ import * as actions from '../../../store/actions/index'
 
 //used in SideDrawer and Topbar
 const navigationItems = (props)=>{
-    // let authMethod = <NavItem link="/auth">Sign In</NavItem>
-    // let me = <NavItem link='/me'>Me</NavItem>
-    // return (
-    //     <ul className={styles.NavigationItems}>
-    //         <NavItem link='/'>Home</NavItem>
-    //         {me}
-    //         {authMethod}
-    //     </ul>
-    // )
 
     let authMethod = <NavItem link="/auth">Sign In</NavItem>
     let dashboard = null
+    let profile = null
     if(props.isLoggedIn){
         dashboard = <NavItem link="/dashboard">Account</NavItem>
-        authMethod = <NavItem link="/logout">Logout</NavItem> // <button onClick={this.props.onLogout}>Logout</button>
+        authMethod = <NavItem link="/logout">Logout</NavItem> // 
+        profile = <NavItem link="/profile">Profile</NavItem> 
     }
     return (
         <ul className={styles.NavigationItems}>
             <NavItem link="/">Home</NavItem>
             {dashboard}
+            {profile}
             {authMethod}
         </ul>
     )

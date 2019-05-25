@@ -13,6 +13,12 @@ const placeOrderSuccess = ()=>{
         type:'placeOrder'
     }
 }
+const placeOrderFail = (err)=>{
+    return {
+        type:'placeOrderFail',
+        error:err
+    }
+}
 export const placeOrder = (order)=> {
     let header = {
         headers: {
@@ -29,6 +35,8 @@ export const placeOrder = (order)=> {
             dispatch(updateBuyingPower(res.data))
             dispatch(placeOrderSuccess())
         })
-        .catch()
+        .catch(err=>{
+            dispatch(placeOrderFail(err))
+        })
     }
 }

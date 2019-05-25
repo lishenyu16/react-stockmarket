@@ -6,7 +6,6 @@ import styles from './Auth.module.css'
 import {FormErrors} from './FormErrors'
 import {connect} from 'react-redux'
 import * as actions from '../../store/actions/index'
-import Spinner from '../../components/UI/Spinner/Spinner'
 
 class Auth extends Component {
 
@@ -130,7 +129,7 @@ class Auth extends Component {
         // }
         let errorMessage = null
         if(this.props.error){
-            errorMessage = (<p>{this.props.error.response.data.error.message}</p>)
+            errorMessage = (<p>{this.props.error.response.data.error}</p>)
         }
 
         let signupClasses = []
