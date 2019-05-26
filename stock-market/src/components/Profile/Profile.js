@@ -1,21 +1,35 @@
 import React, {useState,useEffect} from 'react'
 import styles from './Profile.module.css'
-
+import {connect} from 'react-redux'
+import * as actions from '../../store/actions'
 const Profile = (props)=>{
  
+    const [file, setFile] = useState(null)
 
-    //icon 
-    //blogs
-    //upload file module
+    const uploadImage = ()=>{
+        let data = new FormData()
+        data.append('file', file);
+        props.imageUpload(data)
+    }
+    const imageChange = (e)=>{
+        setFile(e.target.files[0])
+    }
 
     return (
         <div className={styles.Profile}>
-            <div>
-                <lable>Image</lable>
-                <input type="file" name='image' id='image'></input>
-            </div>
+            <input type="file" onChange={imageChange} />
+            <button type='button' onClick={uploadImage}>Upload</button>
         </div>
     )
 }
 
-export default Profile
+const mapStateToProps = (state)=>{
+    return {
+    }
+}
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        imageUpload: (data)=>dispatch(actions.uploadImage(data))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Profile)

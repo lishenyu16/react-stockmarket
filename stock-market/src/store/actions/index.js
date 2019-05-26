@@ -5,3 +5,5 @@ export { auth,authSignIn,logout, checkAuthState } from './auth'
 export {getUserStocks,getUserBuyingPower,getTotalValue,getUserHomeStocks,getUserOrders} from './portfolio'
 
 export {placeOrder} from './stocks'
+
+export {uploadImage} from './profile'
