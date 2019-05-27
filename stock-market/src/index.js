@@ -13,6 +13,7 @@ import authReducer from './store/reducers/auth'
 import stocksReducer from './store/reducers/stocks'
 import portfolioReducer from './store/reducers/portfolio'
 import marketReducer from './store/reducers/market'
+import profileReducer from './store/reducers/profile'
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     stocks: stocksReducer,
     auth: authReducer,
     market:marketReducer,
-    portfolio:portfolioReducer
+    portfolio:portfolioReducer,
+    profile: profileReducer
 })
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
     applyMiddleware(thunk)

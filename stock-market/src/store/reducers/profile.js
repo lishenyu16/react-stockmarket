@@ -1,5 +1,7 @@
 const initialState={
-    uploadingImage:false
+    avatarPath:null,
+    uploadingImage:false,
+    error:null
 }
 
 const reducer = (state=initialState,action)=>{
@@ -12,7 +14,14 @@ const reducer = (state=initialState,action)=>{
         case('uploadImageSuccess'):
             return {
                 ...state,
+                avatarPath: action.data.file,
                 uploadingImage:false
+            }
+        case('uploadImageFail'):
+            return {
+                ...state,
+                uploadingImage:false,
+                error:action.err
             }
         default:
             return state
