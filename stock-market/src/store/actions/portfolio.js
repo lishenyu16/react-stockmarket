@@ -44,7 +44,6 @@ export const getUserBuyingPower = (id)=>{
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
     }
-    console.log('does it come heer?')
     return dispatch =>{
         //1. fetch buying power
         //2. fetch user stocks
