@@ -1,15 +1,23 @@
 .Profile{
+    width:100%;
     margin: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20%;
 }
 .avatar{
-
+    width:100%;
 }
 
 .blogs{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 .blogs_upload{
     
+}
+.blogs_list{
+    display: flex;
+    flex-direction: column;
+
 }

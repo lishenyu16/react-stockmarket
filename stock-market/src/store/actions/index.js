@@ -6,4 +6,4 @@ export {getUserStocks,getUserBuyingPower,getTotalValue,getUserHomeStocks,getUser
 
 export {placeOrder} from './stocks'
 
-export {getProfile,uploadImage,uploadBlog} from './profile'
+export {getProfile,uploadImage,uploadBlog,getBlogs,downloadBlog} from './profile'

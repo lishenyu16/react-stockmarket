@@ -58,11 +58,9 @@ export const getProfile = ()=>{
     }
 }
 
-
-const uploadBlogSuccess = (data)=>{
+const uploadBlogSuccess = ()=>{
     return {
-        type:'uploadBlogSuccess',
-        data
+        type:'uploadBlogSuccess'
     }
 }
 const uploadBlogFail = (err)=>{
@@ -81,7 +79,7 @@ export const uploadBlog = (data)=>{
         dispatch({type:'startUploading'})
         axios().post('/upload/blog',data,header)
             .then(res=>{
-                dispatch(uploadBlogSuccess(res.data))
+                dispatch(uploadBlogSuccess())
             })
             .catch(err=>{
                 console.log(err)
@@ -90,4 +88,57 @@ export const uploadBlog = (data)=>{
     }
 }
 
+const getBlogsSuccess = (data)=>{
+    return {
+        type: 'getBlogs',
+        data
+    }
+}
+export const getBlogs = ()=>{
+    let header = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+    }
+    return dispatch=>{
+        axios().get('/blogs', header)
+            .then(res=>{
+                dispatch(getBlogsSuccess(res.data))
+            })
+            .catch(err=>{
+                console.log(err)
+                //dispatch(getBlogsFail(err))
+            })
+    }
+}
+
+const downloadSuccess = ()=>{
+    return {
+        type:'download'
+    }
+}
+export const downloadBlog = (id)=>{
+    let header = {
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+            responseType: 'blob'
+        }
+    }
+    return dispatch=>{
+        axios().get('/blogs/'+ id, header)
+            .then(response=>{
+                dispatch(downloadSuccess())
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'file.pdf'); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch(err=>{
+                console.log(err)
+                //dispatch(getBlogsFail(err))
+            })
+    }
+}
 

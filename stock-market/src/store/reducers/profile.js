@@ -1,7 +1,7 @@
 const initialState={
     avatarPath:null,
-    blogPath:null,
     uploading:false,
+    blogs:null,
     error:null
 }
 
@@ -27,7 +27,6 @@ const reducer = (state=initialState,action)=>{
         case('uploadBlogSuccess'):
             return {
                 ...state,
-                blogPath: "http://localhost:8000/"+action.data.file,
                 uploading:false
             }
         case('uploadBlogFail'):
@@ -40,6 +39,15 @@ const reducer = (state=initialState,action)=>{
             return {
                 ...state,
                 avatarPath: "http://localhost:8000/"+action.data.profile.avatar
+            }
+        case('getBlogs'):
+            return {
+                ...state,
+                blogs: action.data
+            }
+        case('download'):
+            return {
+                ...state
             }
         default:
             return state
