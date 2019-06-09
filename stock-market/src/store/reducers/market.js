@@ -1,7 +1,6 @@
 const initialState={
     marketStocks:[],
     quote:{},
-    logo:'',
     stockNews:[],
     chart: [],
     topNews:[]
@@ -22,9 +21,8 @@ const reducer = (state=initialState,action)=>{
             return {
                 ...state, 
                 quote: details[0],
-                logo: details[1],
-                stockNews: details[2],
-                chart: details[3]
+                stockNews: details[1],
+                chart: details[2]
             }
         default:
             return state

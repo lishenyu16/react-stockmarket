@@ -54,6 +54,7 @@ const StockDetail = (props)=>{
     }
       
     let quote_component = null
+    let logoUrl = 'https://storage.googleapis.com/iex/api/logos/' + symbol.toUpperCase() + '.png'
     if(props.quote.latestPrice){
         quote_component =
                         <div className={styles.Name_Price_Chart}>
@@ -62,7 +63,7 @@ const StockDetail = (props)=>{
                                 <div className={styles.headline} style={{fontFamily: "'Lora', serif"}}>${props.quote.latestPrice.toLocaleString()}</div>
                             </div>
                             <div className={styles.logo}>
-                                <img src={props.logo}></img>
+                                <img src={logoUrl}></img>  
                             </div>
                             <ul className={styles.rangeChoice}>
                                 <button onClick={()=>selectRange('1d')} className={activeRange=='1d'?styles.RangeChoiceActive:null}>1d</button>
@@ -158,67 +159,69 @@ const StockDetail = (props)=>{
     }
     let tradeComponent= null
     if(!loading){
-        tradeComponent = (
-            <div className={styles.trade}>
-                <div className={styles.tradeTitle}>Trade</div>
-                <div className={styles.type}>
-                    <label>
-                        <input
-                            type="radio" name="type"
-                            value="buy"
-                            checked={tradeType === "buy"}
-                            onChange={handleTradeTypeChange} />Buy
-                    </label>
-                    <label>
-                        <input
-                            type="radio" name="type"
-                            value="sell"
-                            checked={tradeType === "sell"}
-                            onChange={handleTradeTypeChange} />Sell
-                    </label>
+        if(props.isLoggedIn){
+            tradeComponent = (
+                <div className={styles.trade}>
+                    <div className={styles.tradeTitle}>Trade</div>
+                    <div className={styles.type}>
+                        <label>
+                            <input
+                                type="radio" name="type"
+                                value="buy"
+                                checked={tradeType === "buy"}
+                                onChange={handleTradeTypeChange} />Buy
+                        </label>
+                        <label>
+                            <input
+                                type="radio" name="type"
+                                value="sell"
+                                checked={tradeType === "sell"}
+                                onChange={handleTradeTypeChange} />Sell
+                        </label>
+                    </div>
+                    <div className={styles.order}>
+                        <label>
+                            Quantity <input type="text" name="quantity" value={quantity}
+                                    className={styles.quantityInput}
+                                    onChange={handleQuantityInput} />
+                        </label>
+                        <label>
+                            Order Type <select onChange={handleOrderTypeChange} 
+                                    className={styles.orderType}
+                                    value={orderType}>
+                                    <option value='Limit' disabled>Limit Price</option>
+                                    <option value='Market'>Market Price</option>
+                                    <option value='Stop' disabled>Stop</option>
+                                    <option value='Stop Limit' disabled>Stop Limit</option>
+                                </select>
+                        </label>
+                    </div>
+                    <div className={styles.price}>
+                        <label>
+                            Limit Price <input disabled type="text" name="limitprice" 
+                                    className={styles.quantityInput} />
+                        </label>
+                        <label>
+                            Stop Price <input disabled type="text" name="stopprice" 
+                                    className={styles.quantityInput} />
+                        </label>
+                        <label>
+                            Expiration <select onChange={handleOrderTypeChange} 
+                                    className={styles.orderType}
+                                    value={orderType}>
+                                    <option value='Day'>Day</option>
+                                    <option value='GT90'>GT90</option>
+                                    <option value='PreMarket'>Pre Market</option>
+                                    <option value='AfterMarket'>After Market</option>
+                                </select>
+                        </label>
+                    </div>
+                    <div className={styles.submit}>
+                        <button onClick={handleSubmit} className={styles.submitButton}>Submit Order</button>
+                    </div>
                 </div>
-                <div className={styles.order}>
-                    <label>
-                        Quantity <input type="text" name="quantity" value={quantity}
-                                className={styles.quantityInput}
-                                onChange={handleQuantityInput} />
-                    </label>
-                    <label>
-                        Order Type <select onChange={handleOrderTypeChange} 
-                                className={styles.orderType}
-                                value={orderType}>
-                                <option value='Limit' disabled>Limit Price</option>
-                                <option value='Market'>Market Price</option>
-                                <option value='Stop' disabled>Stop</option>
-                                <option value='Stop Limit' disabled>Stop Limit</option>
-                            </select>
-                    </label>
-                </div>
-                <div className={styles.price}>
-                    <label>
-                        Limit Price <input disabled type="text" name="limitprice" 
-                                className={styles.quantityInput} />
-                    </label>
-                    <label>
-                        Stop Price <input disabled type="text" name="stopprice" 
-                                className={styles.quantityInput} />
-                    </label>
-                    <label>
-                        Expiration <select onChange={handleOrderTypeChange} 
-                                className={styles.orderType}
-                                value={orderType}>
-                                <option value='Day'>Day</option>
-                                <option value='GT90'>GT90</option>
-                                <option value='PreMarket'>Pre Market</option>
-                                <option value='AfterMarket'>After Market</option>
-                            </select>
-                    </label>
-                </div>
-                <div className={styles.submit}>
-                    <button onClick={handleSubmit} className={styles.submitButton}>Submit Order</button>
-                </div>
-            </div>
-        ) 
+            )
+        }        
     }
     else{
         tradeComponent = <Spinner />
@@ -287,14 +290,14 @@ const StockDetail = (props)=>{
 const mapStateToProps = (state)=>{
     return {
         quote: state.market.quote,
-        logo: state.market.logo,
         news: state.market.stockNews,
         chart: state.market.chart,
         userStocks: state.portfolio.stocks,
         orders: state.portfolio.orders,
         tradingSuccess: state.stocks.tradingSuccess,
         tradeLoading: state.portfolio.tradeLoading,
-        buyingPower: state.portfolio.buyingPower
+        buyingPower: state.portfolio.buyingPower,
+        isLoggedIn : state.auth.isLoggedIn
     }
 }
 const mapDispatchToProps = (dispatch)=>{

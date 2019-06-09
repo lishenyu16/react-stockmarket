@@ -113,7 +113,7 @@ class Auth extends Component {
                         Sign Up
                     </button>
                 </form>
-        if(!this.state.isSignup){  //sign in mode
+        if(this.state.isSignin){  //sign in mode
             form = <form onSubmit={this.handleFormSubmit}>
                     <Input inputtype='input' type="email" name='email' label="Email" required={true} changed={(event)=>{this.handleInputChange(event,'email')}}  value={this.state.email}></Input>
                     <Input inputtype='input' type="password" name='password' label="Password" required={true} changed={(event)=>{this.handleInputChange(event,'password')}}  value={this.state.password}></Input>

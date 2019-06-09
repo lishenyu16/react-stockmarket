@@ -8,120 +8,66 @@ export const getMarketStocksSuccess = (data)=>{
     }
 }
 
-const getUserStocksSuccess = (datas)=>{
+export const getUserStocksSuccess = (datas)=>{
     return {
         type: 'getUserStocks',
         stocks: datas
     }
 }
 export const getUserStocks = (id)=>{
-    let header = {
-        headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-    }
-    return dispatch =>{
-        if(id!==null){
-            axios().get('/stocks/' + id,header)
-            .then(res=>{
-                dispatch(getUserStocksSuccess(res.data))
-            })
-            .catch(err=>console.log(err))
-        }
-        
+    return {
+        type:'getUserStocks_saga',
+        id
     }
 }
 
-const getUserBuyingPowerSuccess = (data)=>{
+export const getUserBuyingPowerSuccess = (data)=>{
     return {
         type:'getUserBuyingPower',
         data
     }
 }
 export const getUserBuyingPower = (id)=>{
-    let header = {
-        headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-    }
-    return dispatch =>{
-        //1. fetch buying power
-        //2. fetch user stocks
-        if(id!==null&&localStorage.getItem('token')!==null){
-            axios().get(`/getbuyingpower/${id}`,header)
-            .then(res=>{
-                dispatch(getUserBuyingPowerSuccess(res.data))
-            })
-            .catch(err=>console.log(err))
-        }       
+    return {
+        type:'getUserBuyingPower_saga',
+        id
     }
 }
 
-const getTotalValueSuccess = (data)=>{
+export const getTotalValueSuccess = (data)=>{
     return {
         type:'getTotalValue',
         data:data
     }
 }
 export const getTotalValue = () => {
-    return (dispatch,state) =>{
-        let userStocks = state().portfolio.stocks
-        let marketStocks = state().market.marketStocks
-        let totalValue = 0
-        for(let i of userStocks){
-            for(let n of marketStocks){
-                if(i.symbol.toLowerCase()==Object.keys(n)[0].toLowerCase()){
-                    totalValue += i.shares * Object.values(n)[0].quote.latestPrice
-                    break
-                }
-            }
-        }
-        dispatch(getTotalValueSuccess(totalValue))
+    return {
+        type:'getTotalValue_saga'
     }
 }
 
-
-
-const getUserHomeStocksSuccess = (u)=>{
+export const getUserHomeStocksSuccess = (u)=>{
     return {
         type: 'getUserHomeStocks',
         u
     }
 }
 export const getUserHomeStocks = ()=>{
-    return (dispatch,state)=>{
-        let userStocks = state().portfolio.stocks
-        let marketStocks = state().market.marketStocks
-        let u = []
-        if(userStocks.length>0){
-            for(let i of userStocks){
-                u=u.concat(marketStocks.filter(item=>Object.keys(item)[0].toLocaleLowerCase() == i.symbol.toLocaleLowerCase()))
-            }
-        }
-        dispatch(getUserHomeStocksSuccess(u))       
+    return {
+        type: 'getUserHomeStocks_saga'
     }
 }
 
 
-const getUsersOrdersSuccess = (data)=>{
+export const getUsersOrdersSuccess = (data)=>{
     return {
         type:'getOrders',
         data
     }
 }
 export const getUserOrders = ()=>{
-    let header = {
-        headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-    }
-    let id = localStorage.getItem('userId')
-    return dispatch =>{
-        axios().get(`/orders/${id}`, header)
-        .then(res=>{
-            dispatch(getUsersOrdersSuccess(res.data))
-        })
-        .catch(err=>console.log(err))
+    return {
+        type:'getUserOrders_saga'
     }
 }
 

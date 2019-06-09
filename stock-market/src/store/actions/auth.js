@@ -1,6 +1,5 @@
 
 import axios from '../../axiosServer'
-import * as actions from '../../store/actions/index'
 
 export const authSuccess = (authData)=>{
     return {
@@ -17,59 +16,25 @@ export const authFail = (error)=>{
 }
 
 export const logout = ()=>{
-    localStorage.removeItem('username')
-    localStorage.removeItem('userId')
-    localStorage.removeItem('email')
-    localStorage.removeItem('token')
-    localStorage.removeItem('isAdmin')
-    localStorage.removeItem('expirationDate')
     return {
-        type: 'logout'
+        type: 'logout_saga'
     }
 }
 
 //sign up
 export const auth = (username,email,password)=>{
-    const authData = {
+    return {
+        type: 'auth_saga',
         username,
         email,
         password
     }
-    return dispatch=>{
-        axios().post('/register',authData)
-            .then(res=>{
-                localStorage.setItem('userId',res.data.userId)
-                localStorage.setItem('username',res.data.username)
-                localStorage.setItem('email',res.data.email)
-                localStorage.setItem('token',res.data.token)
-                localStorage.setItem('isAdmin',res.data.isAdmin)
-                localStorage.setItem('expirationDate',new Date(res.data.expirationDate))
-                dispatch(authSuccess(res.data))
-            })
-            .catch(err=>{
-                dispatch(authFail(err))
-            })
-    }
 }
 export const authSignIn = (email,password)=>{
-    const authData = {
+    return {
+        type: 'auth_signin_saga',
         email,
         password
-    }
-    return (dispatch)=>{
-        axios().post('/login',authData)
-            .then(res=>{
-                localStorage.setItem('userId',res.data.userId)
-                localStorage.setItem('username',res.data.username)
-                localStorage.setItem('email',res.data.email)
-                localStorage.setItem('token',res.data.token)
-                localStorage.setItem('isAdmin',res.data.isAdmin)
-                localStorage.setItem('expirationDate',new Date(res.data.expirationDate))
-                dispatch(authSuccess(res.data))
-            })
-            .catch(err=>{
-                dispatch(authFail(err))
-            })
     }
 }
 

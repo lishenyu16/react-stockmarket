@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 // import * as apis from '../../iex'
 
 // Promise.all([
@@ -15,23 +15,11 @@ export const getStockDetailSuccess = (arr)=>{
     }
 }
 export const getStockDetail = (symbol,range,chartInterval)=>{
-
-    return dispatch=>{
-        axios.all(
-            [
-                axios.get(`/stock/${symbol}/quote`),
-                axios.get(`/stock/${symbol}/logo`),
-                axios.get(`/stock/${symbol}/news`),
-                axios.get(`/stock/${symbol}/chart/${range}?chartInterval=${chartInterval}`)
-            ]
-        )
-        .then(axios.spread((quoteRes,logoRes,newsRes,chartRes)=> {
-            // All requests are now complete
-            dispatch(getStockDetailSuccess([quoteRes.data,logoRes.data.url,newsRes.data,chartRes.data]))
-        }))
-        .catch(err=>{
-            alert(err)
-        })
+    return {
+        type:'getStockDetail_saga',
+        symbol,
+        range,
+        chartInterval
     }
 }
 
@@ -42,11 +30,7 @@ export const getMarketStocksSuccess = (data)=>{
     }
 }
 export const getMarketStocks = ()=>{
-    return dispatch =>{
-        axios.get('/stock/market/batch?symbols=aapl,fb,tsla,goog,baba,twtr,msft,ba,intc,snap,nflx,techy&types=quote&range=1d&last=5')
-            .then(res=>{
-                dispatch(getMarketStocksSuccess(res.data))
-            })
-            .catch(err=>console.log(err))
+    return {
+        type: 'getMarketStocks_saga'
     }
 }

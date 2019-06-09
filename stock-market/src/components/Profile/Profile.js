@@ -48,12 +48,12 @@ const Profile = (props)=>{
         props.downloadBlog(id)
     }
     let blogsList = null
-    if(props.blogs){
-        blogsList =  props.blogs.map(
-                        item=>{return <div key={item.id}>
-                                        {item.name} - <button onClick={()=>downloadBlog(item.id)} type='button'>Download</button>
-                                    </div>})
-    }
+    // if(props.blogs){
+    //     blogsList =  props.blogs.map(
+    //                     item=>{return <div key={item.id}>
+    //                                     <a href="#/profile" onClick={()=>downloadBlog(item.id)}>{item.name}</a>
+    //                                 </div>})
+    // }
     return (
         <div className={styles.Profile}>   
             {props.uploadingAvatar?<Spinner />:null}        
